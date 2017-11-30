@@ -8,7 +8,8 @@ import java.awt.*;
 public class Line extends Shape {
     private int x1, y1, x2, y2;
 
-    public Line(int x1, int y1, int x2, int y2) {
+    public Line(int x1, int y1, int x2, int y2, Color color) {
+        super(color);
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;
@@ -17,42 +18,39 @@ public class Line extends Shape {
 
     @Override
     public void draw(Graphics g) {
+        g.setColor(color);
         g.drawLine(x1, y1, x2, y2);
     }
 
-    @Override
-    public int getPositionX() {
+    public int getX1() {
         return x1;
     }
 
-    @Override
-    public int getPositionY() {
+    public void setX1(int x1) {
+        this.x1 = x1;
+    }
+
+    public int getY1() {
         return y1;
     }
 
-    @Override
-    public void setPositionX(int x) {
-        this.x1 = x;
+    public void setY1(int y1) {
+        this.y1 = y1;
     }
 
-    @Override
-    public void setPositionY(int y) {
-        this.y1 = y;
-    }
-
-    public int getEndpointX() {
+    public int getX2() {
         return x2;
     }
 
-    public void setEndpointX(int x2) {
+    public void setX2(int x2) {
         this.x2 = x2;
     }
 
-    public int getEndpointY() {
+    public int getY2() {
         return y2;
     }
 
-    public void setEndpointY(int y2) {
+    public void setY2(int y2) {
         this.y2 = y2;
     }
 }

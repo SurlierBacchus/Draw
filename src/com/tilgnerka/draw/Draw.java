@@ -14,10 +14,9 @@ public class Draw {
     private final JFrame frame;
     private final CustomPanel customPanel;
     List<Shape> shapes;
-    private final boolean isDynamic;
+    private List<RenderListener> renderListeners;
 
-    public Draw(String title, int width, int height, boolean isDynamic){
-        this.isDynamic = isDynamic;
+    public Draw(String title, int width, int height){
 
         frame = new JFrame("Frame");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -31,32 +30,40 @@ public class Draw {
         frame.setVisible(true);
 
         shapes = new ArrayList<>();
+        renderListeners = new ArrayList<>();
+        renderListeners.add(customPanel::repaint);
 
-        if (isDynamic){
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    while(true) {
-                        customPanel.repaint();
+        new Thread(() -> {
+            while(true) {
+                for (RenderListener renderListener : renderListeners) renderListener.render();
 
-                        try {
-                            Thread.sleep((long) (1_000.0 / 60.0));
-                        } catch (InterruptedException ignored) {
-                            break;
-                        }
-                    }
+                try {
+                    Thread.sleep((long) (1_000.0 / 30.0));
+                } catch (InterruptedException ignored) {
+                    break;
                 }
-            }).start();
-        }
+            }
+        }).start();
     }
 
     public void draw(Shape shape){
         shapes.add(shape);
-        customPanel.repaint();
     }
 
-    public boolean isDynamic() {
-        return isDynamic;
+    public void remove(Shape shape){
+        shapes.remove(shape);
+    }
+
+    public void remove(int i){
+        shapes.remove(i);
+    }
+
+    public void addRenderListener(RenderListener renderListener){
+        if (renderListener == null) {
+            return;
+        }
+        
+        renderListeners.add(renderListener);
     }
 
     public JFrame getFrame() {

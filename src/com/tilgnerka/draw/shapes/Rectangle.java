@@ -6,12 +6,13 @@ import java.awt.*;
  * Created by Robert Gers on 29.11.2017.
  */
 public class Rectangle extends Shape {
-    private int x1, y1, width, height;
+    private int x, y, width, height;
     private boolean isFilled;
 
-    public Rectangle(int x1, int y1, int width, int height, boolean isFilled) {
-        this.x1 = x1;
-        this.y1 = y1;
+    public Rectangle(int x, int y, int width, int height, Color color, boolean isFilled) {
+        super(color);
+        this.x = x;
+        this.y = y;
         this.width = width;
         this.height = height;
         this.isFilled = isFilled;
@@ -19,31 +20,29 @@ public class Rectangle extends Shape {
 
     @Override
     public void draw(Graphics g) {
+        g.setColor(color);
+
         if (isFilled){
-            g.fillRect(x1, y1, width, height);
+            g.fillRect(x, y, width, height);
         }else {
-            g.drawRect(x1, y1, width, height);
+            g.drawRect(x, y, width, height);
         }
     }
 
-    @Override
-    public int getPositionX() {
-        return x1;
+    public int getX() {
+        return x;
     }
 
-    @Override
-    public int getPositionY() {
-        return y1;
+    public void setX(int x) {
+        this.x = x;
     }
 
-    @Override
-    public void setPositionX(int x) {
-        this.x1 = x;
+    public int getY() {
+        return y;
     }
 
-    @Override
-    public void setPositionY(int y) {
-        this.y1 = y;
+    public void setY(int y) {
+        this.y = y;
     }
 
     public int getWidth() {
