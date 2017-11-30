@@ -13,14 +13,4 @@ public abstract class Shape {
     }
 
     public abstract void draw(Graphics g);
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
 }
