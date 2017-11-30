@@ -17,7 +17,6 @@ public class Draw {
     private List<RenderListener> renderListeners;
 
     public Draw(String title, int width, int height){
-
         frame = new JFrame("Frame");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -35,7 +34,7 @@ public class Draw {
 
         new Thread(() -> {
             while(true) {
-                for (RenderListener renderListener : renderListeners) renderListener.render();
+                for (int i = renderListeners.size() - 1; i >= 0; i--) renderListeners.get(i).render();
 
                 try {
                     Thread.sleep((long) (1_000.0 / 30.0));
@@ -59,10 +58,8 @@ public class Draw {
     }
 
     public void addRenderListener(RenderListener renderListener){
-        if (renderListener == null) {
-            return;
-        }
-        
+        if (renderListener == null) return;
+
         renderListeners.add(renderListener);
     }
 
