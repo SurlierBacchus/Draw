@@ -9,6 +9,15 @@ public class Rectangle extends Shape {
     private int x, y, width, height;
     private boolean isFilled;
 
+    /**
+     * Render a rectangle using {@link com.tilgnerka.draw.DrawHelper#draw(Shape)}
+     * @param x top left corner x-coordinate
+     * @param y top left corner y-coordinate
+     * @param width width of the rectangle in pixels
+     * @param height height of the rectangle in pixels
+     * @param color color of the shape
+     * @param isFilled specify to draw the full shape or just its outline
+     */
     public Rectangle(int x, int y, int width, int height, Color color, boolean isFilled) {
         super(color);
         this.x = x;
@@ -20,8 +29,6 @@ public class Rectangle extends Shape {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(color);
-
         if (isFilled){
             g.fillRect(x, y, width, height);
         }else {

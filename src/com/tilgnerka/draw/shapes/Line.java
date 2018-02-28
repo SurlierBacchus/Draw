@@ -8,6 +8,14 @@ import java.awt.*;
 public class Line extends Shape {
     private int x1, y1, x2, y2;
 
+    /**
+     * Render a line using {@link com.tilgnerka.draw.DrawHelper#draw(Shape)}
+     * @param x1 start point of the line x-coordinate
+     * @param y1 start point of the line y-coordinate
+     * @param x2 end point of the line x-coordinate
+     * @param y2 end point of the line y-coordinate
+     * @param color color of the shape
+     */
     public Line(int x1, int y1, int x2, int y2, Color color) {
         super(color);
         this.x1 = x1;
@@ -18,7 +26,6 @@ public class Line extends Shape {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(color);
         g.drawLine(x1, y1, x2, y2);
     }
 

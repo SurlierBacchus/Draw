@@ -8,20 +8,20 @@ import java.awt.*;
 /**
  * Created by Robert Gers on 29.11.2017.
  */
-class CustomPanel extends JPanel{
-    private Draw draw;
+class RenderablePanel extends JPanel{
+    private DrawHelper drawHelper;
 
-    CustomPanel(Draw draw) {
+    RenderablePanel(DrawHelper drawHelper) {
         super();
-
-        this.draw = draw;
+        this.drawHelper = drawHelper;
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        for (Shape shape : draw.shapes){
+        for (Shape shape : drawHelper.shapes){
+            g.setColor(shape.color);
             shape.draw(g);
         }
     }
