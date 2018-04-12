@@ -160,6 +160,6 @@ public class DrawHelper {
     }
 
     public enum Position {
-        NORTH, SOUTH, WEST, EAST
+        North, South, West, East
     }
 }

@@ -8,11 +8,19 @@ import java.awt.*;
  * Extend this class to create and render any geometric shape using {@link com.tilgnerka.draw.DrawHelper#draw(Shape)}
  */
 public abstract class Shape {
-    public Color color;
+    private Color color;
 
     protected Shape(Color color){
         this.color = color;
     }
 
     public abstract void draw(Graphics g);
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
 }
