@@ -59,22 +59,32 @@ public class DrawHelper {
     }
 
     /**
-     * Initializes a fullscreen JFrame with {@param ui} and fills the remaining space with {@link RenderablePanel} to render custom {@link Shape}
+     * Initializes a fullscreen JFrame with a UI layout and fills the remaining space with {@link RenderablePanel} to render custom {@link Shape}
      * @param title title of the window
      * @param ui view group to be added to the frame
-     * @param position specifies position of {@param ui} relative to the renderable area
+     * @param position specifies position of the UI relative to the renderable area
      */
     public DrawHelper(@Nullable String title, JPanel ui, Position position) {
         this(title, -1, -1, ui, position);
     }
 
     /**
-     * Initializes a JFrame with {@param ui} and fills the remaining space with {@link RenderablePanel} to render custom {@link Shape}
+     * Initializes a JFrame with a UI layout and fills the remaining space with {@link RenderablePanel} to render custom {@link Shape}
+     * @param title title of the window
+     * @param width x-size of the window, -1 for fullscreen
+     * @param height y-size of the window, -1 for fullscreen
+     */
+    public DrawHelper(@Nullable String title, int width, int height) {
+        this(title, width, height, null, null);
+    }
+
+    /**
+     * Initializes a JFrame with a UI layout and fills the remaining space with {@link RenderablePanel} to render custom {@link Shape}
      * @param title title of the window
      * @param width x-size of the window, -1 for fullscreen
      * @param height y-size of the window, -1 for fullscreen
      * @param ui view group to be added to the frame
-     * @param position specifies position of {@param ui} relative to the renderable area
+     * @param position specifies position of the UI relative to the renderable area
      */
     public DrawHelper(@Nullable String title, int width, int height, JPanel ui, Position position){
         if (title != null) frame = new JFrame(title);
@@ -83,7 +93,8 @@ public class DrawHelper {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.add(ui, position.toString());
+
+        if (ui != null && position != null) mainPanel.add(ui, position.toString());
 
         RenderablePanel renderablePanel = new RenderablePanel(this);
         mainPanel.add(renderablePanel, BorderLayout.CENTER);
@@ -139,6 +150,14 @@ public class DrawHelper {
      */
     public void remove(int i){
         shapes.remove(i);
+    }
+
+    /**
+     * Get the list of shapes being rendered
+     * @return a copy of the shapes list, does not mutate original list
+     */
+    public List<Shape> getShapes() {
+        return new ArrayList<>(shapes);
     }
 
     /**
