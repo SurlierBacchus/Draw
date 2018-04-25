@@ -21,7 +21,7 @@ class RenderablePanel extends JPanel{
         super.paintComponent(g);
 
         for (Shape shape : drawHelper.shapes){
-            g.setColor(shape.color);
+            g.setColor(shape.getColor());
             shape.draw(g);
         }
     }
