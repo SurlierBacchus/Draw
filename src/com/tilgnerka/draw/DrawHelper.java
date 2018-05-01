@@ -154,10 +154,10 @@ public class DrawHelper {
 
     /**
      * Get the list of shapes being rendered
-     * @return a copy of the shapes list, does not mutate original list
+     * @return mutable list of shapes
      */
     public List<Shape> getShapes() {
-        return new ArrayList<>(shapes);
+        return shapes;
     }
 
     /**
