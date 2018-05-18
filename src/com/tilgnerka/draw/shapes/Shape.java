@@ -16,6 +16,11 @@ public abstract class Shape {
 
     public abstract void draw(Graphics g);
 
+    /**
+     * Check if point [x, y] is inside this shape
+     */
+    public abstract boolean contains(int x, int y);
+
     public Color getColor() {
         return color;
     }

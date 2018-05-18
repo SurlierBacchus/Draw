@@ -36,6 +36,21 @@ public class Oval extends Shape {
         }
     }
 
+    /**
+     * Check if point [x, y] is inside this shape
+     */
+    @Override
+    public boolean contains(int x, int y){
+        int h = this.x + width/2;
+        int k = this.y + height/2;
+
+        return Math.pow(x - h, 2) / Math.pow(width / 2, 2)
+                +
+                Math.pow(y - k, 2) / Math.pow(height / 2, 2)
+                <=
+                1;
+    }
+
     public int getX() {
         return x;
     }

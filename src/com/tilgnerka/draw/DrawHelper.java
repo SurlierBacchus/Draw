@@ -16,6 +16,9 @@ public class DrawHelper {
     private JFrame frame;
     List<Shape> shapes;
     private List<RenderListener> renderListeners;
+    private RenderablePanel renderablePanel;
+
+    public static final double FRAMERATE = 48.0;
 
     /**
      * Initializes a default JFrame window
@@ -58,6 +61,10 @@ public class DrawHelper {
         return frame;
     }
 
+    public static DrawHelper initializeRenderablePanelOnly(){
+        return new DrawHelper();
+    }
+
     /**
      * Initializes a fullscreen JFrame with a UI layout and fills the remaining space with {@link RenderablePanel} to render custom {@link Shape}
      * @param title title of the window
@@ -87,6 +94,8 @@ public class DrawHelper {
      * @param position specifies position of the UI relative to the renderable area
      */
     public DrawHelper(@Nullable String title, int width, int height, JPanel ui, Position position){
+        this();
+
         if (title != null) frame = new JFrame(title);
         else frame = new JFrame();
 
@@ -96,7 +105,6 @@ public class DrawHelper {
 
         if (ui != null && position != null) mainPanel.add(ui, position.toString());
 
-        RenderablePanel renderablePanel = new RenderablePanel(this);
         mainPanel.add(renderablePanel, BorderLayout.CENTER);
         frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
 
@@ -110,7 +118,10 @@ public class DrawHelper {
 
         frame.pack();
         frame.setVisible(true);
+    }
 
+    private DrawHelper(){
+        renderablePanel = new RenderablePanel(this);
         shapes = new ArrayList<>();
         renderListeners = new ArrayList<>();
         renderListeners.add(renderablePanel::repaint);
@@ -120,7 +131,7 @@ public class DrawHelper {
                 for (int i = renderListeners.size() - 1; i >= 0; i--) renderListeners.get(i).render();
 
                 try {
-                    Thread.sleep((long) (1_000.0 / 30.0));
+                    Thread.sleep((long) (1_000.0 / FRAMERATE));
                 } catch (InterruptedException ignored) {
                     break;
                 }
@@ -153,11 +164,25 @@ public class DrawHelper {
     }
 
     /**
+     * Clears all rendered shapes
+     */
+    public void removeAll(){
+        shapes.clear();
+    }
+
+    /**
      * Get the list of shapes being rendered
      * @return mutable list of shapes
      */
     public List<Shape> getShapes() {
         return shapes;
+    }
+
+    /**
+     * @return Get a class extending {@link JPanel} inside which all shapes are drawn
+     */
+    public RenderablePanel getRenderablePanel() {
+        return renderablePanel;
     }
 
     /**
@@ -172,7 +197,7 @@ public class DrawHelper {
 
     /**
      * Getter for the JFrame window with all contained components
-     * @return current active JFrame
+     * @return current active JFrame, null if no frame was initialized
      */
     public JFrame getFrame() {
         return frame;

@@ -29,6 +29,14 @@ public class Line extends Shape {
         g.drawLine(x1, y1, x2, y2);
     }
 
+    /**
+     * Check if point [x, y] is inside this shape
+     */
+    @Override
+    public boolean contains(int x, int y) {
+        return (float) x / (float) (x2 - x1) == (float) y / (float) (y2 - y1);
+    }
+
     public int getX1() {
         return x1;
     }

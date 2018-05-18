@@ -36,6 +36,16 @@ public class Rectangle extends Shape {
         }
     }
 
+    /**
+     * Check if point [x, y] is inside this shape
+     */
+    @Override
+    public boolean contains(int x, int y) {
+        return (x - this.x <= width && x - this.x >= 0)
+                &&
+                (y - this.y <= height && y - this.y >= 0);
+    }
+
     public int getX() {
         return x;
     }

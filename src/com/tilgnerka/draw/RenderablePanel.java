@@ -8,7 +8,7 @@ import java.awt.*;
 /**
  * Created by Robert Gers on 29.11.2017.
  */
-class RenderablePanel extends JPanel{
+public class RenderablePanel extends JPanel{
     private DrawHelper drawHelper;
 
     RenderablePanel(DrawHelper drawHelper) {
